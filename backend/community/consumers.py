@@ -20,7 +20,7 @@ class PostsConsumer(AsyncWebsocketConsumer):
 
 
 class PostRoomConsumer(AsyncWebsocketConsumer):
-    """Broadcasts new comments/chat messages for one post — the post detail page listens on this."""
+    """Broadcasts new comments for one post — the post detail page listens on this."""
 
     async def connect(self):
         self.post_id = self.scope['url_route']['kwargs']['post_id']

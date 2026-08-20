@@ -8,9 +8,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import ChatMessage, Comment, Post, PostMedia, validate_media_file
+from .models import Comment, Post, PostMedia, validate_media_file
 from .serializers import (
-    ChatMessageSerializer,
     CommentSerializer,
     PostDetailSerializer,
     PostListSerializer,
@@ -69,21 +68,4 @@ class CommentListCreateView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save(post=post, author=request.user)
         broadcast(f'post_{post_id}', {'type': 'post_room_changed', 'kind': 'comment_changed'})
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-
-class ChatMessageListCreateView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
-
-    def get(self, request, post_id):
-        post = get_object_or_404(Post, pk=post_id)
-        messages = post.chat_messages.all()
-        return Response(ChatMessageSerializer(messages, many=True).data)
-
-    def post(self, request, post_id):
-        post = get_object_or_404(Post, pk=post_id)
-        serializer = ChatMessageSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(post=post, author=request.user)
-        broadcast(f'post_{post_id}', {'type': 'post_room_changed', 'kind': 'chat_changed'})
         return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -78,10 +78,6 @@ type DictShape = {
   community_no_comments: string
   community_back_to_board: string
   community_post_not_found: string
-  community_chat_placeholder: string
-  community_chat_send: string
-  community_chat_no_messages: string
-  community_post_chat_title: string
   auth_login_title: string
   auth_register_title: string
   auth_username_placeholder: string
@@ -175,10 +171,6 @@ const dict: Record<Lang, DictShape> = {
     community_no_comments: '아직 댓글이 없어요.',
     community_back_to_board: '← 게시판으로',
     community_post_not_found: '게시글을 찾을 수 없어요.',
-    community_chat_placeholder: '메시지를 입력하세요',
-    community_chat_send: '전송',
-    community_chat_no_messages: '아직 대화가 없어요. 먼저 인사해보세요!',
-    community_post_chat_title: '이 글 채팅방',
     auth_login_title: '로그인',
     auth_register_title: '회원가입',
     auth_username_placeholder: '아이디',
@@ -270,10 +262,6 @@ const dict: Record<Lang, DictShape> = {
     community_no_comments: 'No comments yet.',
     community_back_to_board: '← Back to board',
     community_post_not_found: 'Post not found.',
-    community_chat_placeholder: 'Type a message',
-    community_chat_send: 'Send',
-    community_chat_no_messages: 'No messages yet. Say hi first!',
-    community_post_chat_title: 'Post Chat Room',
     auth_login_title: 'Log In',
     auth_register_title: 'Sign Up',
     auth_username_placeholder: 'Username',

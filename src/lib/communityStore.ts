@@ -39,19 +39,11 @@ export type Post = {
   media: Media[]
 }
 
-export type ChatMessage = {
-  id: string
-  author: string
-  body: string
-  createdAt: number
-}
-
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://127.0.0.1:8000/api'
 const WS_BASE = API_BASE.replace(/^http/, 'ws').replace(/\/api\/?$/, '')
 
 type ApiMedia = { id: number; url: string; kind: 'image' | 'video' }
 type ApiComment = { id: number; author: string; body: string; created_at: string }
-type ApiChatMessage = { id: number; author: string; body: string; created_at: string }
 type ApiPostList = {
   id: number
   author: string
@@ -73,10 +65,6 @@ type ApiPostDetail = {
 
 function toComment(c: ApiComment): Comment {
   return { id: String(c.id), author: c.author, body: c.body, createdAt: Date.parse(c.created_at) }
-}
-
-function toChatMessage(m: ApiChatMessage): ChatMessage {
-  return { id: String(m.id), author: m.author, body: m.body, createdAt: Date.parse(m.created_at) }
 }
 
 function toMedia(m: ApiMedia): Media {
@@ -193,23 +181,7 @@ export function subscribePosts(callback: () => void): () => void {
   return wsSubscribe('/ws/posts/', callback)
 }
 
-// -- Per-post chat --
-
-export async function listPostMessages(postId: string): Promise<ChatMessage[]> {
-  const messages = await apiFetch<ApiChatMessage[]>(`/posts/${postId}/chat/`)
-  return messages.map(toChatMessage)
-}
-
-export async function sendPostMessage(postId: string, input: { body: string }): Promise<ChatMessage> {
-  const m = await apiFetch<ApiChatMessage>(`/posts/${postId}/chat/`, {
-    method: 'POST',
-    body: JSON.stringify({ body: input.body.trim() }),
-  })
-  return toChatMessage(m)
-}
-
-// Fires on any change to this post's room — new comment or new chat message.
-// Used by both the post detail page (comments) and PostChat (chat).
-export function subscribePostMessages(postId: string, callback: () => void): () => void {
+// Fires when a comment is added to this post.
+export function subscribePostComments(postId: string, callback: () => void): () => void {
   return wsSubscribe(`/ws/posts/${postId}/`, callback)
 }

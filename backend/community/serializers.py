@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import ChatMessage, Comment, Post, PostMedia
+from .models import Comment, Post, PostMedia
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -8,15 +8,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['id', 'author', 'body', 'created_at']
-        read_only_fields = ['id', 'author', 'created_at']
-
-
-class ChatMessageSerializer(serializers.ModelSerializer):
-    author = serializers.CharField(source='author.username', read_only=True)
-
-    class Meta:
-        model = ChatMessage
         fields = ['id', 'author', 'body', 'created_at']
         read_only_fields = ['id', 'author', 'created_at']
 

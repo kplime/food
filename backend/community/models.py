@@ -69,16 +69,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.author}: {self.body[:20]}'
-
-
-class ChatMessage(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='chat_messages')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='chat_messages')
-    body = models.CharField(max_length=300)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['created_at']
-
-    def __str__(self):
-        return f'{self.author}: {self.body[:20]}'

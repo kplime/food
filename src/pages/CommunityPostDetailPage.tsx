@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { addComment, getPost, subscribePostMessages, type Post } from '../lib/communityStore'
-import { PostChat } from '../components/PostChat'
+import { addComment, getPost, subscribePostComments, type Post } from '../lib/communityStore'
 import { useAuth } from '../auth/AuthContext'
 import { useLanguage } from '../i18n/LanguageContext'
 
@@ -22,7 +21,7 @@ export function CommunityPostDetailPage() {
       })
     }
     load()
-    return subscribePostMessages(id, load)
+    return subscribePostComments(id, load)
   }, [id])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -119,8 +118,6 @@ export function CommunityPostDetailPage() {
           </p>
         )}
       </section>
-
-      <PostChat postId={post.id} />
     </div>
   )
 }
