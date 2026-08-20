@@ -15,9 +15,8 @@ services:
         value: "False"
       - key: DJANGO_ALLOWED_HOSTS
         value: obang-korean-food-backend.onrender.com
-      # Update this after the Vercel deploy gives you its real URL.
       - key: CORS_ALLOWED_ORIGINS
-        value: http://localhost:5173
+        value: https://food-alpha-sage.vercel.app,http://localhost:5173
       - key: DATABASE_URL
         fromDatabase:
           name: obang-korean-food-db
