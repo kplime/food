@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* 오방색 (obangsaek) — traditional five Korean directional colors */
+  --color-obang-blue: #1b4b93; /* 청 (靑) — east, wood */
+  --color-obang-red: #c8102e; /* 적 (赤) — south, fire */
+  --color-obang-yellow: #ffb81c; /* 황 (黃) — center, earth */
+  --color-obang-white: #f7f5f0; /* 백 (白) — west, metal */
+  --color-obang-black: #1a1a1a; /* 흑 (黑) — north, water */
+
+  --font-display: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  --font-body: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+
+  --shadow-hard: 4px 4px 0 0 var(--color-obang-black);
+  --shadow-hard-lg: 6px 6px 0 0 var(--color-obang-black);
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-obang-white);
+  color: var(--color-obang-black);
+}
